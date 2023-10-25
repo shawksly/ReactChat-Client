@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import {useState} from 'react';
-import {BrowserRouter, Routers,Route} from 'react-router-dom'
-import Navbar from './components/navbar/Navbar'
+import {BrowserRouter, Routers,Route} from 'react-router-dom';
+import Navbar from './components/navbar/Navbar';
+import Footer from './components/footer/Footer';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <BrowserRouter>
       <Navbar/>
       
+      <Footer />
       </BrowserRouter>
     </div>
   );
