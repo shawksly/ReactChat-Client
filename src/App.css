@@ -51,8 +51,3 @@
     transform: rotate(360deg);
   }
 }
-
-/* https://stackoverflow.com/questions/45642065/how-to-use-bootstrap-4-flexbox-to-fill-available-content */
-/* .flex-grow {
-  flex: 1 0 auto;
-} */
