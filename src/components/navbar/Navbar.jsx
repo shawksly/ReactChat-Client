@@ -4,14 +4,14 @@ const Brand = () =>{
   return(
     <>
       <Navbar
-    className="my-2"
-    color="secondary"
-    dark
-  >
-    <NavbarBrand href="/">
-      DSJ CHAT SERVER
-    </NavbarBrand>
-  </Navbar>
+        className="mb-2 align-self-stretch"
+        color="secondary"
+        dark
+      >
+        <NavbarBrand href="/">
+          DSJ CHAT SERVER
+        </NavbarBrand>
+      </Navbar>
     </>
   )
 }

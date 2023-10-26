@@ -1,18 +1,20 @@
-import {Navbar, NavbarBrand} from 'reactstrap'
+import {Navbar, NavbarText} from 'reactstrap'
 
 
 const Footer = () =>{
   return(
     <>
       <Navbar
-    className="my-2 App-footer"
-    color="secondary"
-    dark
-  >
-    <NavbarBrand href="/">
-      Upright Project: React Chat
-    </NavbarBrand>
-  </Navbar>
+        className="mt-auto align-self-stretch -flex justify-content-center"
+        color="secondary"
+        dark
+      >
+        <NavbarText
+          className="mx-auto"
+        >
+          <h5>Upright Project: React Chat</h5>
+        </NavbarText>
+      </Navbar>
     </>
   )
 }
