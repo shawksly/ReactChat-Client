@@ -13,7 +13,7 @@ function Auth({ setToken, signup, setSignup }) {
 					?
 					<Signup setToken={setToken} setSignup={setSignup} />
 					:
-					<h2>Login REPLACE</h2>
+					<div><h2>Login REPLACE</h2><button onClick={() => {setSignup(true);}}>back REPLACE</button></div>
 				}
 			</Container>
 		</>

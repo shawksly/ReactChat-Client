@@ -80,20 +80,15 @@ function Signup({ setToken, setSignup }) {
   // runs on button click
   async function processUserData(e) {
     e.preventDefault();
-    console.log(username);
-    console.log(email);
-    console.log(password);
+    console.log("username: ", username);
+    console.log("email: ", email);
+    console.log("password: ", password);
 
     try {
       // request sent to server
       let response = await fetch("http://localhost:4000/user/signup", {
         headers: new Headers({
-          "content-type": "application/json",
-          //https://stackoverflow.com/questions/68105091/cors-response-to-preflight-request-doesnt-pass-access-control-check-how-to-s
-          // "Access-Control-Allow-Origin": "*",
-          // "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
-          // "Access-Control-Allow-Headers": "*",
-          // another option: https://stackoverflow.com/questions/8719276/cross-origin-request-headerscors-with-php-headers
+          "content-type": "application/json"
         }),
         method: "POST",
         body: JSON.stringify({
@@ -108,7 +103,8 @@ function Signup({ setToken, setSignup }) {
 
       setToken(results.token);
 
-      if (response.status === 200) navigate("/about");
+      // TODO needs to redirect somewhere
+      if (response.status === 200) navigate("#");
     } catch (error) {
       console.log(error);
     }
