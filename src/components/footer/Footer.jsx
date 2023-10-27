@@ -5,7 +5,7 @@ const Footer = () =>{
   return(
     <>
       <Navbar
-        className="mt-auto align-self-stretch -flex justify-content-center"
+        className="mt-auto align-self-stretch d-flex justify-content-center"
         color="secondary"
         dark
       >
