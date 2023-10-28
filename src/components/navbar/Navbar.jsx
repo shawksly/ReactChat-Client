@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-import {Navbar, NavbarBrand,Button} from 'reactstrap'
+import { Navbar, NavbarBrand, Button } from 'reactstrap'
 
-const Brand = ({token,clearToken}) =>{
+const Brand = ({ token, clearToken }) =>{
   const navigate = useNavigate()
+  
   function logout(){
-   
     navigate('/')
   }
 
