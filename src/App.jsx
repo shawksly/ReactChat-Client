@@ -33,7 +33,7 @@ function App() {
     <div className="App min-vh-100 p-0 container-fluid d-flex flex-column align-items-center">
       <BrowserRouter>
 
-        <Navbar/>
+        <Navbar token={token} clearToken={clearToken}/>
 
         <Routes>
 

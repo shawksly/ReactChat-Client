@@ -1,12 +1,9 @@
-import { useNavigate } from 'react-router-dom'
-import { Navbar, NavbarBrand, Button } from 'reactstrap'
-
-const Brand = ({ token, clearToken }) =>{
-  const navigate = useNavigate()
+import { Navbar, NavbarBrand} from 'reactstrap'
+import Logout from '../auth/logout/Logout'
+const Brand = ({ token, clearToken}) =>{
   
-  function logout(){
-    navigate('/')
-  }
+  
+ 
 
   return(
     <>
@@ -19,11 +16,11 @@ const Brand = ({ token, clearToken }) =>{
           DSJ CHAT SERVER
         </NavbarBrand>
         {
-        token
+        !token
         ?
         null
         :
-        <Button color='dark' onClick={clearToken}>Logout</Button>
+        <Logout clearToken={clearToken}/>
   
         }
       </Navbar>
