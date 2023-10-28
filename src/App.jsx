@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Auth from './components/auth/Auth'
 import Footer from './components/footer/Footer';
-
+import Display from './components/display/Display'
 function App() {
 
   const [token, setToken] = useState('');
@@ -37,7 +37,7 @@ function App() {
         <Routes>
 
             <Route path="/" element={<Auth setToken={updateToken} signup={signup} setSignup={setSignup} />} />
-
+            <Route path='/display' element={<Display token={token} clearToken={clearToken}/>}/>
         </Routes>
         
         <Footer />
