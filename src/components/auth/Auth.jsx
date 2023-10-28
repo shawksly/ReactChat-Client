@@ -1,5 +1,6 @@
 import { Container } from 'reactstrap'
 import Signup from './signup/Signup'
+import Login from './login/Login'
 
 function Auth({ setToken, signup, setSignup }) {
 	return (
@@ -13,7 +14,7 @@ function Auth({ setToken, signup, setSignup }) {
 					?
 					<Signup setToken={setToken} setSignup={setSignup} />
 					:
-					<div><h2>Login REPLACE</h2><button onClick={() => {setSignup(true);}}>back REPLACE</button></div>
+					<Login setToken={setToken} setSignup={setSignup} />
 				}
 			</Container>
 		</>

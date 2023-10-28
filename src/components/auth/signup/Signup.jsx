@@ -64,7 +64,7 @@ function Signup({ setToken, setSignup }) {
               setSignup(false);
             }}
           >
-            Test
+            Back to Login
           </Button>
 
           {/* button to submit */}
