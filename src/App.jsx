@@ -30,8 +30,8 @@ function App() {
   }
   
   return (
-    <div className="App min-vh-100 p-0 container-fluid d-flex flex-column align-items-center">
-      <BrowserRouter>
+    <div className="text-center min-vh-100 p-0 container-fluid d-flex flex-column align-items-center">
+      <BrowserRouter style={{ height: "100%" }}>
 
         <Navbar token={token} clearToken={clearToken}/>
 
