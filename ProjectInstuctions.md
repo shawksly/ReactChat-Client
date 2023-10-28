@@ -69,7 +69,7 @@ This would assume that items prior have been completed and that the `Footer Comp
   - Display
   - Add Room
   - Update
-  - Delete
+  - Delete<>"
 
 **Ticket Requirements**
 - Room selections should be displayed within a sidebar.
