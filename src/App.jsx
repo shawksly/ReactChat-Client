@@ -5,12 +5,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Auth from './components/auth/Auth'
 import Footer from './components/footer/Footer';
-import Display from './components/display/Display'
+import Display from './components/display/Display';
+
 function App() {
 
   const [token, setToken] = useState('');
   const [signup, setSignup] = useState(true);
-
+  
   useEffect(initializeToken, []);
   
   function initializeToken() {
@@ -26,6 +27,7 @@ function App() {
   function clearToken() {
     setToken('');
     localStorage.removeItem('token');
+    
   }
   
   return (
