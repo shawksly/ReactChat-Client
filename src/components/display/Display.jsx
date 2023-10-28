@@ -1,17 +1,18 @@
 import React from 'react'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 
 
 function Display() {
   return (
 			<Container
 				// TODO h-50 doesn't do anything and I'd like to come back and fix that at some point -Scott
-				className="d-flex flex-column m-2 p-3 h-100"
-        style={{ backgroundColor: "blue" }}
+				className="d-flex flex-column m-2 h-100"
 			>
         <Row className="g-5">
+          {/* Add rooms column */}
           <Col className="bg-light">
-            <h2>Available Rooms</h2>
+            {/* //?ROOM LIST COMPONENT */}
+            {/* <h2>Available Rooms</h2>
             <br />
             <Row>
               <Col
@@ -20,10 +21,12 @@ function Display() {
               >
               </Col>
             </Row>
-            <Button></Button>
+            <Button></Button> */}
           </Col>
+          {/* Display room column */}
           <Col className="bg-light">
-            <h2>Title, message</h2>
+            {/* //?ROOM DISPLAY COMPONENT */}
+            {/* <h2>Title, message</h2> */}
           </Col>
         </Row>
 			</Container>
@@ -31,3 +34,16 @@ function Display() {
 }
 
 export default Display
+
+/* 
+map
+
+{
+  map
+  return(
+    <jsx
+    (useState with setRoom or something)
+    >
+  )
+}
+*/
