@@ -104,7 +104,7 @@ function Signup({ setToken, setSignup }) {
       setToken(results.token);
 
       // TODO needs to redirect somewhere
-      if (response.status === 200) navigate("#");
+      if (response.status === 200) navigate("/display");
     } catch (error) {
       console.log(error);
     }
