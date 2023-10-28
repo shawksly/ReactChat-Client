@@ -5,8 +5,7 @@ import { Container, Form, FormGroup, Input, Label, Button } from "reactstrap";
 function Login({ setToken, setSignup }) {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   return (
@@ -23,20 +22,6 @@ function Login({ setToken, setSignup }) {
             }}
           />
           <Label for="usernameInput">Username</Label>
-        </FormGroup>
-
-        {/* Email */}
-        <FormGroup floating>
-          <Input
-            id="emailInput"
-            name="email"
-            placeholder="Email"
-            type="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <Label for="emailInput">Email</Label>
         </FormGroup>
 
         {/* Password */}
@@ -60,10 +45,10 @@ function Login({ setToken, setSignup }) {
           <Button
             className="btn-link link-secondary"
             onClick={() => {
-              setSignup(false);
+              setSignup(true);
             }}
           >
-            Back to Login
+            Create Account
           </Button>
 
           {/* button to submit */}
@@ -80,19 +65,17 @@ function Login({ setToken, setSignup }) {
   async function processUserData(e) {
     e.preventDefault();
     console.log("username: ", username);
-    console.log("email: ", email);
     console.log("password: ", password);
 
     try {
       // request sent to server
-      let response = await fetch("http://localhost:4000/user/signup", {
+      let response = await fetch("http://localhost:4000/user/login", {
         headers: new Headers({
           "content-type": "application/json"
         }),
         method: "POST",
         body: JSON.stringify({
           username,
-          email,
           password,
         }),
       });
@@ -110,4 +93,4 @@ function Login({ setToken, setSignup }) {
   }
 }
 
-export default Signup;
+export default Login;
