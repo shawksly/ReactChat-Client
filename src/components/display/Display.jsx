@@ -1,8 +1,9 @@
 import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
+import AddRoom from '../rooms/addrooms/AddRoom'
 
 
-function Display() {
+function Display({token, clearToken}) {
   return (
 			<Container
 				// TODO h-50 doesn't do anything and I'd like to come back and fix that at some point -Scott
@@ -11,6 +12,9 @@ function Display() {
         <Row className="g-5">
           {/* Add rooms column */}
           <Col className="bg-light">
+            
+            
+            <AddRoom token = { token }/>
             {/* //?ROOM LIST COMPONENT */}
             {/* <h2>Available Rooms</h2>
             <br />
