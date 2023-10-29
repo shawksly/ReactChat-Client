@@ -38,7 +38,7 @@ function App() {
         <Routes>
 
             <Route path="/" element={<Auth setToken={updateToken} signup={signup} setSignup={setSignup} />} />
-            <Route path='/display' element={<Display token={token} clearToken={clearToken} />} />
+            <Route path='/display' element={<Display token={token} />} />
         </Routes>
         
         <Footer />
