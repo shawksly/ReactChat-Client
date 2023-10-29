@@ -89,3 +89,13 @@ export default AddRoom;
 
 // useParams from react-router-dom
 // 
+
+// Notes from Conor about messages:
+// passed to message component:
+// Message
+// fetchmesssages
+// token
+
+// in message update, use messages.id
+// let id = message id
+// url+ id
