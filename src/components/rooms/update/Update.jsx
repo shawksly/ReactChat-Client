@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
 import { useState } from "react";
 
-function AddRoom({ token }) {
+function Update({ token }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [roomName, setRoomname] = useState('');
@@ -12,14 +12,15 @@ function AddRoom({ token }) {
   return (
     <>
       <Button color="dark" onClick={toggle}>
-        Add Room
+        Update
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>New Rooms</ModalHeader>
+        <ModalHeader toggle={toggle}>Update Room</ModalHeader>
         <ModalBody>
           <FormGroup floating>
             <Input
               id="roomNameInput"
+              // TODO active='owner_id' {true?}
               name="roomName"
               placeholder="RoomName"
               type="roomName"
@@ -46,7 +47,7 @@ function AddRoom({ token }) {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={postRoom}>
-            Add Room
+            Update Room
           </Button>{' '}
           <Button color="secondary" onClick={toggle}>
             Cancel
@@ -63,12 +64,12 @@ function AddRoom({ token }) {
       toggle();
 
       try {
-        let response = await fetch("http://localhost:4000/room/create", {
+        let response = await fetch("http://localhost:4000/room/:id", {
           headers: new Headers({
             "content-type": "application/json",
             "authorization": token
           }),
-          method: "POST",
+          method: "PATCH",
           body: JSON.stringify({
             title: roomName,
             description: description
@@ -76,7 +77,7 @@ function AddRoom({ token }) {
         });
 
         let results = await response.json();
-      console.log("results", results);
+        console.log("results", results);
   
       } catch (error) {
         console.log(error);
@@ -84,8 +85,4 @@ function AddRoom({ token }) {
   }
 }
 
-export default AddRoom;
-
-
-// useParams from react-router-dom
-// 
+export default Update

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import RoomsList from '../rooms/roomslist/RoomsList'
-
+import Update from '../rooms/update/Update'
+import Delete from '../rooms/delete/Delete'
 
 function Display({token}) {
   return (
@@ -25,6 +26,9 @@ function Display({token}) {
 
             {/* Display room column */}
             {/* //? ROOM DISPLAY COMPONENT */}
+            <Update/>
+            <br/>
+            <Delete/>
           </Col>
         </Row>
 			</Container>
