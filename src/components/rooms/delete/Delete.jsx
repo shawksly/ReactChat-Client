@@ -2,7 +2,7 @@ import React from 'react'
 import { Button} from "reactstrap";
 import { useState } from "react";
 
-function Delete({ token }) {
+function Delete({ token, currentRoomId }) {
   
   const [roomName, setRoomname] = useState('');
   const [description, setDescription] = useState('');
@@ -24,7 +24,7 @@ function Delete({ token }) {
       ;
 
       try {
-        let response = await fetch("http://localhost:4000/room/:id", {
+        let response = await fetch(`http://localhost:4000/room/${currentRoomId}`, {
           headers: new Headers({
             "content-type": "application/json",
             "authorization": token
