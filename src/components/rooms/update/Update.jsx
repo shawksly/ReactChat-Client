@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
 import { useState } from "react";
 
-function Update({ token }) {
+function Update({ token, currentRoomId }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [roomName, setRoomname] = useState('');
@@ -64,7 +64,7 @@ function Update({ token }) {
       toggle();
 
       try {
-        let response = await fetch("http://localhost:4000/room/:id", {
+        let response = await fetch(`http://localhost:4000/room/${currentRoomId}`, {
           headers: new Headers({
             "content-type": "application/json",
             "authorization": token

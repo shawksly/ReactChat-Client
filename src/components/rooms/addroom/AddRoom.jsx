@@ -11,7 +11,7 @@ function AddRoom({ token }) {
 
   return (
     <>
-      <Button color="dark" onClick={toggle}>
+      <Button color="dark" onClick={toggle} className="mb-3">
         Add Room
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
