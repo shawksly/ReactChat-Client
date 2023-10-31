@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
 import { useState } from "react";
 
-function Update({ token, currentRoomId, fetchRooms }) {
+function Update({ setCurrentRoom, token, currentRoomId, fetchRooms }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [roomName, setRoomname] = useState('');
@@ -63,6 +63,14 @@ function Update({ token, currentRoomId, fetchRooms }) {
       console.log("description: ", description);
       toggle();
 
+      // TODO Need something like this in case user doesn't fill out both fields (server can handle one field if only that field is sent in json).
+      // const body = {};
+      // if(roomName)
+      //   body.title = roomName;
+      // if(description)
+      //   body.description = description;
+
+
       try {
         let response = await fetch(`http://localhost:4000/room/${currentRoomId}`, {
           headers: new Headers({
@@ -80,9 +88,11 @@ function Update({ token, currentRoomId, fetchRooms }) {
         console.log("results", results);
         console.log("token", token);
 
-        fetchRooms();
-
-        // TODO rerender currentroom
+        if(response.status === 200) {
+          fetchRooms();
+          // TODO rerender currentroom (below doesn't work)
+          // setCurrentRoom();
+        }
   
         } catch (error) {
           console.log(error);

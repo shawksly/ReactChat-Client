@@ -11,7 +11,7 @@ function AddRoom({ token, fetchRooms }) {
 
   return (
     <>
-      <Button color="dark" onClick={toggle} className="mb-3">
+      <Button color="dark" onClick={toggle}>
         Add Room
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
@@ -77,7 +77,9 @@ function AddRoom({ token, fetchRooms }) {
 
         let results = await response.json();
       console.log("results", results);
+
         fetchRooms();
+
       } catch (error) {
         console.log(error);
       }

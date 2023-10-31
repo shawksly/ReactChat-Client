@@ -52,7 +52,7 @@ function Login({ setToken, setSignup }) {
           </Button>
 
           {/* button to submit */}
-          <Button size="lg" onClick={processUserData}>
+          <Button size="lg" color="dark" onClick={processUserData}>
             Submit
           </Button>
 
