@@ -3,37 +3,9 @@ import { Row, Col } from "reactstrap";
 import AddRoom from "../addroom/AddRoom"
 
 
-function RoomsList({ token, chooseDisplayedRoom, currentRoom, currentRoomId }) {
-
-  let [rooms, setRooms] = useState([])
+function RoomsList({ token, chooseDisplayedRoom, currentRoom, currentRoomId, fetchRooms, rooms }) {
   
   useEffect(() => {
-
-    async function fetchRooms() {
-      
-      try {
-        let response = await fetch("http://localhost:4000/room/list", {
-          headers: new Headers({
-            'content-type': 'application/json',
-            'authorization': token
-          }),
-          method: 'GET'
-        });
-        
-        let results = await response.json();
-        console.log(results);
-        
-        setRooms(results);
-        
-        // TODO make this do something if successful
-        // if(response.status === 200)
-        //   something
-        
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    
     fetchRooms();
     
   }, [token])

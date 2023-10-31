@@ -2,7 +2,7 @@ import React from 'react'
 import { Button} from "reactstrap";
 import { useState } from "react";
 
-function Delete({ token, currentRoomId }) {
+function Delete({ token, currentRoomId, fetchRooms }) {
   
   const [roomName, setRoomname] = useState('');
   const [description, setDescription] = useState('');
@@ -38,6 +38,8 @@ function Delete({ token, currentRoomId }) {
 
         let results = await response.json();
         console.log("results", results);
+
+        fetchRooms();
   
       } catch (error) {
         console.log(error);

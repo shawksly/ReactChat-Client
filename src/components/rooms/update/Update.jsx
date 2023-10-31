@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
 import { useState } from "react";
 
-function Update({ token, currentRoomId }) {
+function Update({ token, currentRoomId, fetchRooms }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [roomName, setRoomname] = useState('');
@@ -78,10 +78,15 @@ function Update({ token, currentRoomId }) {
 
         let results = await response.json();
         console.log("results", results);
+        console.log("token", token);
+
+        fetchRooms();
+
+        // TODO rerender currentroom
   
-      } catch (error) {
-        console.log(error);
-      }
+        } catch (error) {
+          console.log(error);
+        }
   }
 }
 
