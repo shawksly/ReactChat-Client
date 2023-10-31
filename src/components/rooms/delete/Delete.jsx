@@ -2,16 +2,12 @@ import React from 'react'
 import { Button} from "reactstrap";
 import { useState } from "react";
 
-function Delete({ token, currentRoomId, fetchRooms }) {
-  
-  const [roomName, setRoomname] = useState('');
-  const [description, setDescription] = useState('');
-
+function Delete({ token, setCurrentRoom, currentRoomId, setCurrentRoomId, fetchRooms }) {
 
   return (
     <>
       <Button color="dark" onClick={deleteRoom}>
-        Delete {/* TODO -- track owner_id */}
+        Delete
       </Button>
       
     </>
@@ -19,9 +15,7 @@ function Delete({ token, currentRoomId, fetchRooms }) {
 
   async function deleteRoom (e) {
     e.preventDefault();
-      console.log("room: ", roomName);
-      console.log("description: ", description);
-      ;
+      console.log("deleting room");
 
       try {
         let response = await fetch(`http://localhost:4000/room/${currentRoomId}`, {
@@ -35,12 +29,15 @@ function Delete({ token, currentRoomId, fetchRooms }) {
         let results = await response.json();
         console.log("results", results);
 
-        fetchRooms();
+        if(response.status === 200) {
+          fetchRooms();
+          setCurrentRoom(null);
+          setCurrentRoomId(null);
+        }
   
       } catch (error) {
         console.log(error);
       }
   }
 }
-//temp comment
 export default Delete;
