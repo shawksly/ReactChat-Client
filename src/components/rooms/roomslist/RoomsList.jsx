@@ -8,7 +8,7 @@ function RoomsList({ token, chooseDisplayedRoom, currentRoom, currentRoomId, fet
   useEffect(() => {
     fetchRooms();
     
-  }, [token])
+  }, [token,])
 
     // TODO why this no work?
       // useEffect(function (token) {
@@ -56,7 +56,7 @@ function RoomsList({ token, chooseDisplayedRoom, currentRoom, currentRoomId, fet
           }
         </Col>
       </Row>
-      <AddRoom token={token} />
+      <AddRoom token={token} fetchRooms={fetchRooms} />
     </>
   );
 }
