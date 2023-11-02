@@ -31,6 +31,7 @@ function RoomDisplay({
             fetchRooms={fetchRooms}
           />
         </Col>
+        {/* https://stackoverflow.com/questions/21515042/scrolling-a-flexbox-with-overflowing-content */}
         <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10">
           <h1>{currentRoom.title}</h1>
         {/* <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10" style={{ maxHeight: "75vh" }}>
