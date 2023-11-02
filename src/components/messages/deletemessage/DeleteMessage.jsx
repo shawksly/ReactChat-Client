@@ -2,12 +2,7 @@ import React from 'react'
 
 function DeleteMessage() {
   return (
-    <div>
-    <button aria-label="Delete">
-  <svg class="bi bi-twitter-x">
-  </svg>
-</button>
-    </div>
+      <i className="bi bi-twitter-x m-1" role="button" style={{fontSize: "1rem", color: "black"}} onClick={null}></i>
   )
 }
 

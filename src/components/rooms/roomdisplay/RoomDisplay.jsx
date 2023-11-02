@@ -10,9 +10,7 @@ function RoomDisplay({
   currentRoomId,
   setCurrentRoomId,
   token,
-  fetchRooms,
-  fetchMessages,
-  messages
+  fetchRooms
 }) {
   return (
     <>
@@ -36,11 +34,12 @@ function RoomDisplay({
         </Col>
         {/* https://stackoverflow.com/questions/21515042/scrolling-a-flexbox-with-overflowing-content */}
         <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10">
-          <h1>{currentRoom.title}</h1>
+          <h1 className="text-capitalize">{currentRoom.title}</h1>
         {/* <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10" style={{ maxHeight: "75vh" }}>
           <h1>{currentRoom.title}</h1> */}
-          {/* // TODO Needs to be replaced by message display component containing the below code */}
-          <MessagesDisplay fetchMessages={fetchMessages} messages={messages}/>
+
+          
+          <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token}/>
 
           {/* // TODO Needs to be replaced by input component containing the below code */}
           <Form className="d-flex align-self-stretch">

@@ -26,7 +26,7 @@ function RoomsList({ token, chooseDisplayedRoom, currentRoom, currentRoomId, fet
                   // TODO there has to be an eaiser way with useState
                   onClick={() => {chooseDisplayedRoom(room)}}
                 >
-                  <h4 className="text-break">{room.title}</h4>
+                  <h4 className="text-break text-capitalize">{room.title}</h4>
                 </button>
               )
             })
