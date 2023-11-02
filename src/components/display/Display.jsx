@@ -4,14 +4,37 @@ import RoomsList from "../rooms/roomslist/RoomsList";
 import RoomDisplay from "../rooms/roomdisplay/RoomDisplay";
 
 function Display({ token }) {
-  const [currentRoom, setCurrentRoom] = useState("");
+  const [currentRoom, setCurrentRoom] = useState({});
   const [currentRoomId, setCurrentRoomId] = useState("");
-  let [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState([]); 
+  const [messages, setMessages] = useState([]);
 
   function chooseDisplayedRoom(room) {
     setCurrentRoom(room);
     setCurrentRoomId(room._id);
   }
+
+  async function fetchMessages() {
+    if (token)
+      try {
+        let response = await fetch(`http://localhost:4000/message/show/${currentRoomId}`, {
+          headers: new Headers({
+            "content-type": "application/json",
+            authorization: token,
+          }),
+          method: "GET",
+        });
+        
+        let results = await response.json();
+        console.log(results);
+        console.log(token);
+
+        // TODO make this do something if successful
+        if (response.status === 200) setMessages(results);
+      } catch (error) {
+        console.log(error);
+      }
+  } 
 
   async function fetchRooms() {
     if (token)
@@ -62,6 +85,8 @@ function Display({ token }) {
               setCurrentRoomId={setCurrentRoomId}
               token={token}
               fetchRooms={fetchRooms}
+              fetchMessages={fetchMessages}
+              messages={messages}
             />
           )}
         </Col>
