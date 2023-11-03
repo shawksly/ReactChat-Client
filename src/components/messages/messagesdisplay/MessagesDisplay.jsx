@@ -65,7 +65,7 @@ function MessagesDisplay({ currentRoomId, currentRoom, token }) {
                         <small className="text-muted lh-1"><em>{smallerDate(message.date)}</em></small>
                       </div>
                       <div className="d-flex align-items-end justify-content-start">
-                        <h6 className="me-auto mb-2 text-start">{message.text}</h6>
+                        <h6 className="me-auto mb-2 text-start">{message.username}: {message.text}</h6>
                         <UpdateMessage />
                         <DeleteMessage />
                       </div>
