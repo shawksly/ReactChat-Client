@@ -4,9 +4,9 @@ import RoomsList from "../rooms/roomslist/RoomsList";
 import RoomDisplay from "../rooms/roomdisplay/RoomDisplay";
 
 function Display({ token }) {
-  const [currentRoom, setCurrentRoom] = useState("");
+  const [currentRoom, setCurrentRoom] = useState({});
   const [currentRoomId, setCurrentRoomId] = useState("");
-  let [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState({}); 
 
   function chooseDisplayedRoom(room) {
     setCurrentRoom(room);
@@ -54,7 +54,7 @@ function Display({ token }) {
         </Col>
         <Col className="bg-light py-3 pe-3" xs="9">
           {/* Display room column */}
-          {!currentRoom ? null : (
+          {Object.keys(currentRoom).length <= 0 ? null : (
             <RoomDisplay
               currentRoom={currentRoom}
               setCurrentRoom={setCurrentRoom}

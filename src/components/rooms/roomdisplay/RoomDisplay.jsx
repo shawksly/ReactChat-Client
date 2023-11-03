@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Form, Input, Button } from "reactstrap";
 import Update from "../update/Update";
 import Delete from "../delete/Delete";
+import MessagesDisplay from "../../messages/messagesdisplay/MessagesDisplay";
 
 function RoomDisplay({
   currentRoom,
@@ -9,7 +10,7 @@ function RoomDisplay({
   currentRoomId,
   setCurrentRoomId,
   token,
-  fetchRooms,
+  fetchRooms
 }) {
   return (
     <>
@@ -33,17 +34,13 @@ function RoomDisplay({
         </Col>
         {/* https://stackoverflow.com/questions/21515042/scrolling-a-flexbox-with-overflowing-content */}
         <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10">
-          <h1>{currentRoom.title}</h1>
+          <h1 className="text-capitalize">{currentRoom.title}</h1>
         {/* <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10" style={{ maxHeight: "75vh" }}>
           <h1>{currentRoom.title}</h1> */}
-          {/* // TODO Needs to be replaced by message display component containing the below code */}
-          <div className="container border border-dark bg-white m-3 d-flex flex-column align-items-start flex-grow-1 justify-content-end">
-          {/* <div className="container border border-dark bg-white m-3 d-flex flex-column align-items-start flex-grow-1 justify-content-end vh-100 mh-100" style={{ overflowY: "scroll", maxHeight: "50vh" }}> */}
-            <h6>TEST MESSAGE</h6>
-            <h6>TEST MESSAGE</h6>
-            <h6>TEST MESSAGE</h6>
-            <h6>TEST MESSAGE</h6>
-          </div>
+
+          
+          <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token}/>
+
           {/* // TODO Needs to be replaced by input component containing the below code */}
           <Form className="d-flex align-self-stretch">
             {/* <FormGroup> */}
