@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Row, Col, Form, Input, Button } from "reactstrap";
 import Update from "../update/Update";
 import Delete from "../delete/Delete";
@@ -14,6 +14,36 @@ function RoomDisplay({
   fetchRooms,
   fetchMessages
 }) {
+
+  const [messages, setMessages] = useState({});
+
+  async function fetchMessages() {
+    if (token)
+      try {
+        let response = await fetch(`http://localhost:4000/message/show/${currentRoomId}`, {
+          headers: new Headers({
+            "content-type": "application/json",
+            authorization: token,
+          }),
+          method: "GET",
+        });
+        
+        let results = await response.json();
+        console.log(results);
+        console.log(token);
+
+        // TODO make this do something if successful
+        if (response.status === 200) {
+          setMessages(results);
+        } else {
+          setMessages({})
+        }
+
+      } catch (error) {
+        console.log(error);
+      }
+  }
+
   return (
     <>
       <Row className="h-100">
@@ -41,7 +71,7 @@ function RoomDisplay({
           <h1>{currentRoom.title}</h1> */}
 
           
-          <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token}/>
+          <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token} fetchMessages={fetchMessages} messages={messages}/>
 
           {/* // TODO Needs to be replaced by input component containing the below code */}
           <SendMessage
