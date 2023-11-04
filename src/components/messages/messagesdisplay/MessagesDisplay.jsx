@@ -2,40 +2,11 @@ import { useEffect, useState } from 'react'
 import DeleteMessage from '../deletemessage/DeleteMessage'
 import UpdateMessage from '../updatemessage/UpdateMessage'
 
-function MessagesDisplay({ currentRoomId, currentRoom, token }) {
-
-  const [messages, setMessages] = useState({});
+function MessagesDisplay({ currentRoomId, currentRoom, token, fetchMessages, messages }) {
 
   useEffect (() => {
     fetchMessages()
   }, [currentRoom])
-
-  async function fetchMessages() {
-    if (token)
-      try {
-        let response = await fetch(`http://localhost:4000/message/show/${currentRoomId}`, {
-          headers: new Headers({
-            "content-type": "application/json",
-            authorization: token,
-          }),
-          method: "GET",
-        });
-        
-        let results = await response.json();
-        console.log(results);
-        console.log(token);
-
-        // TODO make this do something if successful
-        if (response.status === 200) {
-          setMessages(results);
-        } else {
-          setMessages({})
-        }
-
-      } catch (error) {
-        console.log(error);
-      }
-  }
 
   // https://stackoverflow.com/questions/19407305/how-to-show-only-hours-and-minutes-from-javascript-date-tolocaletimestring
   function smallerDate(time) {
