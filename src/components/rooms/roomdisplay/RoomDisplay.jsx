@@ -3,6 +3,7 @@ import { Row, Col, Form, Input, Button } from "reactstrap";
 import Update from "../update/Update";
 import Delete from "../delete/Delete";
 import MessagesDisplay from "../../messages/messagesdisplay/MessagesDisplay";
+import SendMessage from "../../messages/sendmessage/SendMessage";
 
 function RoomDisplay({
   currentRoom,
@@ -10,7 +11,8 @@ function RoomDisplay({
   currentRoomId,
   setCurrentRoomId,
   token,
-  fetchRooms
+  fetchRooms,
+  fetchMessages
 }) {
   return (
     <>
@@ -42,13 +44,13 @@ function RoomDisplay({
           <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token}/>
 
           {/* // TODO Needs to be replaced by input component containing the below code */}
-          <Form className="d-flex align-self-stretch">
-            {/* <FormGroup> */}
-              <Input id="exampleText" name="text" type="textarea" rows="2" />
-              <Button className="align-self-end ms-3" color="dark" onClick={null}>Send</Button>
-            {/* </FormGroup> */}
+          <SendMessage
+          currentRoomId={currentRoomId}
+          token={token}
+          fetchMessages={fetchMessages}
+          />
 
-          </Form>
+          
         </Col>
       </Row>
     </>
