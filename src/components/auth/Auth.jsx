@@ -1,6 +1,6 @@
 import { Container } from 'reactstrap'
 import Signup from './signup/Signup'
-import Login from './login/Login'
+import Login from './Login/Login'
 
 function Auth({ setToken, signup, setSignup }) {
 	return (
