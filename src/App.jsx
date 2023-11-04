@@ -11,6 +11,7 @@ function App() {
 
   const [token, setToken] = useState('');
   const [signup, setSignup] = useState(true);
+  const [userId, setUserId] = useState('')
   
   useEffect(initializeToken, []);
   
@@ -37,8 +38,8 @@ function App() {
 
         <Routes>
 
-            <Route path="/" element={<Auth setToken={updateToken} signup={signup} setSignup={setSignup} />} />
-            <Route path='/display' element={<Display token={token} />} />
+            <Route path="/" element={<Auth setToken={updateToken} signup={signup} setSignup={setSignup} setUserId={setUserId} />} />
+            <Route path='/display' element={<Display token={token} userId={userId} />} />
         </Routes>
         
         <Footer />

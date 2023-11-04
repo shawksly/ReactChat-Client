@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, FormGroup, Input, Label, Button } from "reactstrap";
 
-function Signup({ setToken, setSignup }) {
+function Signup({ setToken, setSignup, setUserId }) {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -102,6 +102,7 @@ function Signup({ setToken, setSignup }) {
       console.log("results", results);
 
       setToken(results.token);
+      setUserId(results.user._id);
 
       // TODO needs to redirect somewhere
       if (response.status === 200) navigate("/display");

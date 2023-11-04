@@ -2,7 +2,7 @@ import { Container } from 'reactstrap'
 import Signup from './signup/Signup'
 import Login from './Login/Login'
 
-function Auth({ setToken, signup, setSignup }) {
+function Auth({ setToken, signup, setSignup, setUserId }) {
 	return (
 		<>
 			<Container
@@ -12,9 +12,9 @@ function Auth({ setToken, signup, setSignup }) {
 				{
 					signup
 					?
-					<Signup setToken={setToken} setSignup={setSignup} />
+					<Signup setToken={setToken} setSignup={setSignup} setUserId={setUserId} />
 					:
-					<Login setToken={setToken} setSignup={setSignup} />
+					<Login setToken={setToken} setSignup={setSignup} setUserId={setUserId} />
 				}
 			</Container>
 		</>
