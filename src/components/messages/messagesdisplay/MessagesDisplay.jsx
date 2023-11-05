@@ -66,8 +66,17 @@ function MessagesDisplay({ currentRoomId, currentRoom, token }) {
                       </div>
                       <div className="d-flex align-items-end justify-content-start">
                         <h6 className="me-auto mb-2 text-start">{message.username}: {message.text}</h6>
-                        <UpdateMessage />
-                        <DeleteMessage />
+                        <UpdateMessage 
+                        fetchMessages={fetchMessages}
+                        token={token}
+                        messageId={message._id}
+                        currentRoomId={currentRoomId}
+                        />
+                        <DeleteMessage 
+                        messageId={message._id}
+                        fetchMessages={fetchMessages}
+                        token={token}
+                        />
                       </div>
                       <hr className="mt-0 mb-3"/>
                     </div>
