@@ -15,19 +15,27 @@ function App() {
   
   useEffect(initializeToken, []);
   
+  // TODO remane these
   function initializeToken() {
     setToken(localStorage.token);
     console.log("localStorage.token: ", localStorage.token);
+    setUserId(localStorage.userId);
+    console.log("localStorage.userId: ", localStorage.userId);
   }
   
-  function updateToken(newToken) {
+  function updateToken(newToken, newId) {
     setToken(newToken);
     localStorage.token = newToken;
+    setUserId(newId)
+    localStorage.userId = newId;
+    console.log(localStorage);
   }
   
   function clearToken() {
     setToken('');
     localStorage.removeItem('token');
+    setUserId('');
+    localStorage.removeItem('userId');
   }
   
   return (
@@ -45,7 +53,7 @@ function App() {
         <Footer />
 
       </BrowserRouter>
-      {token}
+      {/* {token} */}
     </div>
   );
 }

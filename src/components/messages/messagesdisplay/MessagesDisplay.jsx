@@ -21,42 +21,40 @@ function MessagesDisplay({ currentRoomId, currentRoom, token, fetchMessages, mes
   }
 
   return (
-    <div className="container border border-dark bg-white m-3 p-2 d-flex flex-column align-items-start flex-grow-1 justify-content-end">
-          {/* <div className="container border border-dark bg-white m-3 d-flex flex-column align-items-start flex-grow-1 justify-content-end vh-100 mh-100" style={{ overflowY: "scroll", maxHeight: "50vh" }}> */}
-            <h6>TEST MESSAGE 1</h6>
-            <h6>TEST MESSAGE 2</h6>
-            <h6>TEST MESSAGE 3</h6>
-            <h6>TEST MESSAGE 4</h6>
-            {
-              !messages.getAllMessages ? null : (
-                messages.getAllMessages?.map ((message) => {
-                  return (
-                    <div key={message._id} className="w-100">
-                      <div className="d-flex align-items-end justify-content-start">
-                        <small className="text-muted lh-1"><em>{smallerDate(message.date)}</em></small>
-                      </div>
-                      <div className="d-flex align-items-end justify-content-start">
-                        <h6 className="me-auto mb-2 text-start">{message.username}: {message.text}</h6>
-                        <UpdateMessage 
-                        fetchMessages={fetchMessages}
-                        token={token}
-                        messageId={message._id}
-                        currentRoomId={currentRoomId}
-                        />
-                        <DeleteMessage 
-                        messageId={message._id}
-                        fetchMessages={fetchMessages}
-                        token={token}
-                        />
-                      </div>
-                      <hr className="mt-0 mb-3"/>
-                    </div>
-                  )
-                })
-              )
-            }
-
-      </div>
+    <div className="container border border-dark bg-white m-3 d-flex flex-column align-items-start flex-grow-1 overflow-y-scroll">
+      <h6>TEST MESSAGE 1</h6>
+      <h6>TEST MESSAGE 2</h6>
+      <h6>TEST MESSAGE 3</h6>
+      <h6>TEST MESSAGE 4</h6>
+      {
+        !messages.getAllMessages ? null : (
+          messages.getAllMessages?.map ((message) => {
+            return (
+              <div key={message._id} className="w-100">
+                <div className="d-flex align-items-end justify-content-start">
+                  <small className="text-muted lh-1"><em>{smallerDate(message.date)}</em></small>
+                </div>
+                <div className="d-flex align-items-end justify-content-start">
+                  <h6 className="me-auto mb-2 text-start">{message.username}: {message.text}</h6>
+                  <UpdateMessage 
+                  fetchMessages={fetchMessages}
+                  token={token}
+                  messageId={message._id}
+                  currentRoomId={currentRoomId}
+                  />
+                  <DeleteMessage 
+                  messageId={message._id}
+                  fetchMessages={fetchMessages}
+                  token={token}
+                  />
+                </div>
+                <hr className="mt-0 mb-3"/>
+              </div>
+            )
+          })
+        )
+      }
+    </div>
   )
 }
 

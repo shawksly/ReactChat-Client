@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
 import { useState } from "react";
 
-function Update({ setCurrentRoom, token, currentRoomId, fetchRooms }) {
+function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerStatus }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [roomName, setRoomname] = useState('');
@@ -11,7 +11,7 @@ function Update({ setCurrentRoom, token, currentRoomId, fetchRooms }) {
 
   return (
     <>
-      <Button color="dark" onClick={toggle}>
+      <Button color="dark" disabled={!roomOwnerStatus} onClick={toggle}>
         Update
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
