@@ -31,7 +31,7 @@ function Delete({ token, setCurrentRoom, currentRoomId, setCurrentRoomId, fetchR
 
         if(response.status === 200) {
           fetchRooms();
-          setCurrentRoom(null);
+          setCurrentRoom({});
           setCurrentRoomId(null);
         }
   
