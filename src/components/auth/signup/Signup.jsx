@@ -101,8 +101,7 @@ function Signup({ setToken, setSignup, setUserId }) {
       let results = await response.json();
       console.log("results", results);
 
-      setToken(results.token);
-      setUserId(results.user._id);
+      setToken(results.token, results.user._id);
 
       // TODO needs to redirect somewhere
       if (response.status === 200) navigate("/display");

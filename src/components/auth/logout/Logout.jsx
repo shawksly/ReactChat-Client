@@ -6,8 +6,8 @@ function Logout({clearToken}) {
   const navigate = useNavigate()
 
   function redirect(){
-    clearToken()
-    navigate('/')
+    clearToken();
+    navigate('/');
   }
 
   return (

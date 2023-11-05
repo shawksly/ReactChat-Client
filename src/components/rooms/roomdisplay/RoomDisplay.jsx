@@ -12,7 +12,10 @@ function RoomDisplay({
   setCurrentRoomId,
   token,
   fetchRooms,
-  fetchMessages
+  fetchMessages,
+  userId,
+  roomUserId,
+  roomOwnerStatus
 }) {
 
   const [messages, setMessages] = useState({});
@@ -53,6 +56,7 @@ function RoomDisplay({
             currentRoomId={currentRoomId}
             token={token}
             fetchRooms={fetchRooms}
+            roomOwnerStatus={roomOwnerStatus}
           />
           <h3 className="m-4">Description</h3>
           <p className="text-break flex-grow-1">{currentRoom.description}</p>
@@ -62,13 +66,14 @@ function RoomDisplay({
             setCurrentRoomId={setCurrentRoomId}
             token={token}
             fetchRooms={fetchRooms}
+            roomOwnerStatus={roomOwnerStatus}
           />
         </Col>
         {/* https://stackoverflow.com/questions/21515042/scrolling-a-flexbox-with-overflowing-content */}
-        <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10">
-          <h1 className="text-capitalize">{currentRoom.title}</h1>
-        {/* <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10" style={{ maxHeight: "75vh" }}>
-          <h1>{currentRoom.title}</h1> */}
+        {/* <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10">
+          <h1 className="text-capitalize">{currentRoom.title}</h1> */}
+        <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10" style={{ maxHeight: "75vh", overflow: "hidden" }}>
+          <h1>{currentRoom.title}</h1>
 
           
           <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token} fetchMessages={fetchMessages} messages={messages}/>

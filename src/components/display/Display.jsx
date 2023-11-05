@@ -1,16 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import RoomsList from "../rooms/roomslist/RoomsList";
 import RoomDisplay from "../rooms/roomdisplay/RoomDisplay";
 
-function Display({ token }) {
+function Display({ token, userId }) {
   const [currentRoom, setCurrentRoom] = useState({});
   const [currentRoomId, setCurrentRoomId] = useState("");
-  const [rooms, setRooms] = useState({}); 
+  const [rooms, setRooms] = useState({});
+  const [roomUserId, setRoomUserId] = useState('');
+  const [roomOwnerStatus, setRoomOwnerstatus] = useState(false);
+
+  useEffect(() => {
+    if(userId === roomUserId) {
+      setRoomOwnerstatus(true);
+    } else {
+      setRoomOwnerstatus(false);
+    };
+    
+  }, [userId, roomUserId])
 
   function chooseDisplayedRoom(room) {
     setCurrentRoom(room);
     setCurrentRoomId(room._id);
+    setRoomUserId(room.owner);
+
+    console.log('user', userId);
+    console.log('room', roomUserId);
+    console.log('equal', userId === roomUserId);
+    console.log('owner', room.owner);
+
+    if(userId === roomUserId) {
+      setRoomOwnerstatus(true);
+    } else {
+      setRoomOwnerstatus(false);
+    };
   }
 
   async function fetchRooms() {
@@ -62,6 +85,9 @@ function Display({ token }) {
               setCurrentRoomId={setCurrentRoomId}
               token={token}
               fetchRooms={fetchRooms}
+              userId={userId}
+              roomUserId={roomUserId}
+              roomOwnerStatus={roomOwnerStatus}
             />
           )}
         </Col>

@@ -2,11 +2,11 @@ import React from 'react'
 import { Button} from "reactstrap";
 import { useState } from "react";
 
-function Delete({ token, setCurrentRoom, currentRoomId, setCurrentRoomId, fetchRooms }) {
+function Delete({ token, setCurrentRoom, currentRoomId, setCurrentRoomId, fetchRooms, roomOwnerStatus }) {
 
   return (
     <>
-      <Button color="dark" onClick={deleteRoom}>
+      <Button color="dark" disabled={!roomOwnerStatus} onClick={deleteRoom}>
         Delete
       </Button>
       
