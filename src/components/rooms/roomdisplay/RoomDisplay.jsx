@@ -76,7 +76,7 @@ function RoomDisplay({
           <h1>{currentRoom.title}</h1>
 
           
-          <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token} fetchMessages={fetchMessages} messages={messages}/>
+          <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token} fetchMessages={fetchMessages} messages={messages} userId={userId} />
 
           {/* // TODO Needs to be replaced by input component containing the below code */}
           <SendMessage

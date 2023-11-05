@@ -29,6 +29,7 @@ function Display({ token, userId }) {
     console.log('equal', userId === roomUserId);
     console.log('owner', room.owner);
 
+    // TODO REMOVE
     if(userId === roomUserId) {
       setRoomOwnerstatus(true);
     } else {

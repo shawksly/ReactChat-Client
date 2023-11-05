@@ -90,8 +90,8 @@ function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerSta
 
         if(response.status === 200) {
           fetchRooms();
-          // TODO rerender currentroom (below doesn't work)
-          // setCurrentRoom();
+          setRoomname('');
+          setDescription('');
         }
   
         } catch (error) {
