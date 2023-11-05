@@ -39,7 +39,8 @@ function SendMessage({
       })
       let results = await response.json();
       console.log('results',results)
-      fetchMessages()
+      fetchMessages();
+      document.getElementById('text').value = '';
     }catch (error){
       console.log(error)
     }

@@ -46,14 +46,14 @@ e.preventDefault();
   toggle();
 
   try {
-    let response = await fetch(`http://localhost:4000/${currentRoomId}/${messageId}`, {
+    let response = await fetch(`http://localhost:4000/message/${currentRoomId}/${messageId}`, {
       headers: new Headers({
         "content-type": "application/json",
         "authorization": token
       }),
       method: "PATCH",
       body: JSON.stringify({
-        message: messageContent
+        text: messageContent
       }),
     });
 
