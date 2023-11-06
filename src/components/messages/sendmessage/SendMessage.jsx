@@ -5,7 +5,8 @@ import {useState} from "react"
 function SendMessage({
   currentRoomId,
   token,
-  fetchMessages
+  fetchMessages,
+  errorHandler
 }) {
   
   const [message,setMessage] = useState('')
@@ -39,6 +40,9 @@ function SendMessage({
       })
       let results = await response.json();
       console.log('results',results)
+
+      errorHandler(results);
+
       fetchMessages();
       document.getElementById('text').value = '';
     }catch (error){

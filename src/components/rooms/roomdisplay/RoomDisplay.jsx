@@ -15,7 +15,8 @@ function RoomDisplay({
   fetchMessages,
   userId,
   roomUserId,
-  roomOwnerStatus
+  roomOwnerStatus,
+  errorHandler
 }) {
 
   const [messages, setMessages] = useState({});
@@ -34,6 +35,8 @@ function RoomDisplay({
         let results = await response.json();
         console.log(results);
         console.log(token);
+
+        errorHandler(results);
 
         // TODO make this do something if successful
         if (response.status === 200) {
@@ -57,6 +60,7 @@ function RoomDisplay({
             token={token}
             fetchRooms={fetchRooms}
             roomOwnerStatus={roomOwnerStatus}
+            errorHandler={errorHandler}
           />
           <h3 className="m-4">Description</h3>
           <p className="text-break flex-grow-1">{currentRoom.description}</p>
@@ -67,6 +71,7 @@ function RoomDisplay({
             token={token}
             fetchRooms={fetchRooms}
             roomOwnerStatus={roomOwnerStatus}
+            errorHandler={errorHandler}
           />
         </Col>
         {/* https://stackoverflow.com/questions/21515042/scrolling-a-flexbox-with-overflowing-content */}
@@ -76,13 +81,14 @@ function RoomDisplay({
           <h1>{currentRoom.title}</h1>
 
           
-          <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token} fetchMessages={fetchMessages} messages={messages} userId={userId} />
+          <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token} fetchMessages={fetchMessages} messages={messages} userId={userId} errorHandler={errorHandler} />
 
           {/* // TODO Needs to be replaced by input component containing the below code */}
           <SendMessage
           currentRoomId={currentRoomId}
           token={token}
           fetchMessages={fetchMessages}
+          errorHandler={errorHandler}
           />
 
           

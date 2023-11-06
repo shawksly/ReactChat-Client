@@ -2,11 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import{Button} from 'reactstrap'
 
-function Logout({clearToken}) {
+function Logout({clearUser}) {
   const navigate = useNavigate()
 
   function redirect(){
-    clearToken();
+    clearUser();
     navigate('/');
   }
 

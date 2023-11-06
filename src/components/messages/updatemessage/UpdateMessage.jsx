@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
 import { useState } from "react";
 
-function UpdateMessage( { fetchMessages, token, messageId, currentRoomId }) {
+function UpdateMessage( { fetchMessages, token, messageId, currentRoomId, errorHandler }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [messageContent, setMessageContent] = useState('');
@@ -58,6 +58,9 @@ e.preventDefault();
     });
 
     let results = await response.json();
+
+    errorHandler(results);
+
     console.log("results", results);
     console.log("token", token);
 
