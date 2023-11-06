@@ -3,11 +3,18 @@ import { Row, Col } from "reactstrap";
 import AddRoom from "../addroom/AddRoom"
 
 
-function RoomsList({ token, chooseDisplayedRoom, currentRoom, currentRoomId, fetchRooms, rooms }) {
+function RoomsList({ token, chooseDisplayedRoom, currentRoom, currentRoomId, fetchRooms, rooms, errorHandler }) {
   
+  // https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
+  useEffect(() => {
+    const roomInterval = setInterval(() => {
+      fetchRooms();
+    }, 30000);
+    return () => clearInterval(roomInterval);
+  }, []);
+
   useEffect(() => {
     fetchRooms();
-    
   }, [token])
   
   return (
@@ -33,7 +40,7 @@ function RoomsList({ token, chooseDisplayedRoom, currentRoom, currentRoomId, fet
           }
         </Col>
       </Row>
-      <AddRoom token={token} fetchRooms={fetchRooms} />
+      <AddRoom token={token} fetchRooms={fetchRooms} errorHandler={errorHandler} />
     </>
   );
 }

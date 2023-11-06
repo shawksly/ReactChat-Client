@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Container, Form, FormGroup, Input, Label, Button } from "reactstrap";
 
-function Login({ setToken, setSignup, setUserId }) {
+function Login({ updateUser, setSignup, setUserId, errorHandler }) {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -83,7 +83,9 @@ function Login({ setToken, setSignup, setUserId }) {
       let results = await response.json();
       console.log("results", results);
 
-      setToken(results.token, results.user._id);
+      errorHandler(results);
+
+      updateUser(results.token, results.user._id);
 
       // TODO needs to redirect somewhere
       if (response.status === 200) navigate("/display");

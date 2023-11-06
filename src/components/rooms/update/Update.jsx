@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
 import { useState } from "react";
 
-function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerStatus }) {
+function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerStatus, errorHandler }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [roomName, setRoomname] = useState('');
@@ -20,7 +20,6 @@ function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerSta
           <FormGroup floating>
             <Input
               id="roomNameInput"
-              // TODO active='owner_id' {true?}
               name="roomName"
               placeholder="RoomName"
               type="roomName"
@@ -64,11 +63,11 @@ function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerSta
       toggle();
 
       // TODO Need something like this in case user doesn't fill out both fields (server can handle one field if only that field is sent in json).
-      // const body = {};
-      // if(roomName)
-      //   body.title = roomName;
-      // if(description)
-      //   body.description = description;
+      const body = {};
+      if(roomName.length > 0)
+        body.title = roomName;
+      if(description.length > 0)
+        body.description = description;
 
 
       try {
@@ -78,20 +77,20 @@ function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerSta
             "authorization": token
           }),
           method: "PATCH",
-          body: JSON.stringify({
-            title: roomName,
-            description: description
-          }),
+          body: JSON.stringify(body),
         });
 
         let results = await response.json();
         console.log("results", results);
         console.log("token", token);
 
+        errorHandler(results);
+        
+        setRoomname('');
+        setDescription('');
+
         if(response.status === 200) {
           fetchRooms();
-          setRoomname('');
-          setDescription('');
         }
   
         } catch (error) {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button} from "reactstrap";
 import { useState } from "react";
 
-function Delete({ token, setCurrentRoom, currentRoomId, setCurrentRoomId, fetchRooms, roomOwnerStatus }) {
+function Delete({ token, setCurrentRoom, currentRoomId, setCurrentRoomId, fetchRooms, roomOwnerStatus, errorHandler }) {
 
   return (
     <>
@@ -28,6 +28,8 @@ function Delete({ token, setCurrentRoom, currentRoomId, setCurrentRoomId, fetchR
 
         let results = await response.json();
         console.log("results", results);
+
+        errorHandler(results);
 
         if(response.status === 200) {
           fetchRooms();

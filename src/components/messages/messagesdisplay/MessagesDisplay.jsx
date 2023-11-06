@@ -1,12 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import DeleteMessage from '../deletemessage/DeleteMessage'
 import UpdateMessage from '../updatemessage/UpdateMessage'
 
-function MessagesDisplay({ currentRoomId, currentRoom, token, fetchMessages, messages, userId }) {
+function MessagesDisplay({ currentRoomId, currentRoom, token, fetchMessages, messages, userId, errorHandler }) {
+
+  const messagesEndRef = useRef(null);
+
+  // https://stackoverflow.com/questions/72372407/react-auto-scroll-to-bottom-of-a-div
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  };
+
+  // https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
+  useEffect(() => {
+    const messageInterval = setInterval(() => {
+      fetchMessages()
+    }, 30000);
+    return () => clearInterval(messageInterval);
+  }, []);
 
   useEffect (() => {
-    fetchMessages()
+    fetchMessages();
   }, [currentRoom])
+
+  useEffect (() => {
+    scrollToBottom();
+  }, [messages])
 
   // https://stackoverflow.com/questions/19407305/how-to-show-only-hours-and-minutes-from-javascript-date-tolocaletimestring
   function smallerDate(time) {
@@ -21,7 +40,7 @@ function MessagesDisplay({ currentRoomId, currentRoom, token, fetchMessages, mes
   }
 
   return (
-    <div className="container border border-dark bg-white m-3 d-flex flex-column align-items-start flex-grow-1 overflow-y-scroll">
+    <div className="container border border-dark bg-white m-3 p-3 d-flex flex-column align-items-start flex-grow-1 overflow-y-scroll">
       {
         !messages.getAllMessages ? null : (
           messages.getAllMessages?.map ((message) => {
@@ -42,11 +61,13 @@ function MessagesDisplay({ currentRoomId, currentRoom, token, fetchMessages, mes
                       token={token}
                       messageId={message._id}
                       currentRoomId={currentRoomId}
+                      errorHandler={errorHandler}
                       />
                       <DeleteMessage 
                       messageId={message._id}
                       fetchMessages={fetchMessages}
                       token={token}
+                      errorHandler={errorHandler}
                       />
                     </>
                   }
@@ -57,6 +78,7 @@ function MessagesDisplay({ currentRoomId, currentRoom, token, fetchMessages, mes
           })
         )
       }
+      <div ref={messagesEndRef} />
     </div>
   )
 }

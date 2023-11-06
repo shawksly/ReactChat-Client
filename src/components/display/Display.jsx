@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import RoomsList from "../rooms/roomslist/RoomsList";
 import RoomDisplay from "../rooms/roomdisplay/RoomDisplay";
 
-function Display({ token, userId }) {
+function Display({ token, userId, errorHandler }) {
   const [currentRoom, setCurrentRoom] = useState({});
   const [currentRoomId, setCurrentRoomId] = useState("");
   const [rooms, setRooms] = useState({});
@@ -49,6 +49,9 @@ function Display({ token, userId }) {
         });
 
         let results = await response.json();
+        
+        errorHandler(results);
+
         console.log(results);
         console.log(token);
 
@@ -74,6 +77,7 @@ function Display({ token, userId }) {
             currentRoom={currentRoom}
             currentRoomId={currentRoomId}
             rooms={rooms}
+            errorHandler={errorHandler}
           />
         </Col>
         <Col className="bg-light py-3 pe-3" xs="9">
@@ -89,6 +93,7 @@ function Display({ token, userId }) {
               userId={userId}
               roomUserId={roomUserId}
               roomOwnerStatus={roomOwnerStatus}
+              errorHandler={errorHandler}
             />
           )}
         </Col>

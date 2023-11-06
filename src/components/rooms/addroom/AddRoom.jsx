@@ -2,12 +2,43 @@ import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
 import { useState } from "react";
 
-function AddRoom({ token, fetchRooms }) {
+function AddRoom({ token, fetchRooms, errorHandler }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [roomName, setRoomname] = useState('');
   const [description, setDescription] = useState('');
 
+  async function postRoom (e) {
+    e.preventDefault();
+      console.log("room: ", roomName);
+      console.log("description: ", description);
+      toggle();
+
+      try {
+        let response = await fetch("http://localhost:4000/room/create", {
+          headers: new Headers({
+            "content-type": "application/json",
+            "authorization": token
+          }),
+          method: "POST",
+          body: JSON.stringify({
+            title: roomName,
+            description: description
+          }),
+        });
+
+        let results = await response.json();
+
+        errorHandler(results);
+
+        console.log("results", results);
+
+        fetchRooms();
+
+      } catch (error) {
+        console.log(error);
+      }
+  }
 
   return (
     <>
@@ -55,49 +86,6 @@ function AddRoom({ token, fetchRooms }) {
       </Modal>
     </>
   );
-
-  async function postRoom (e) {
-    e.preventDefault();
-      console.log("room: ", roomName);
-      console.log("description: ", description);
-      toggle();
-
-      try {
-        let response = await fetch("http://localhost:4000/room/create", {
-          headers: new Headers({
-            "content-type": "application/json",
-            "authorization": token
-          }),
-          method: "POST",
-          body: JSON.stringify({
-            title: roomName,
-            description: description
-          }),
-        });
-
-        let results = await response.json();
-      console.log("results", results);
-
-        fetchRooms();
-
-      } catch (error) {
-        console.log(error);
-      }
-  }
 }
 
 export default AddRoom;
-
-
-// useParams from react-router-dom
-// 
-
-// Notes from Conor about messages:
-// passed to message component:
-// Message
-// fetchmesssages
-// token
-
-// in message update, use messages.id
-// let id = message id
-// url+ id

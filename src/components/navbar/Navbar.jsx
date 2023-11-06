@@ -1,9 +1,6 @@
 import { Navbar, NavbarBrand} from 'reactstrap'
 import Logout from '../auth/logout/Logout'
-const Brand = ({ token, clearToken}) =>{
-  
-  
- 
+const Brand = ({ token, clearUser}) =>{
 
   return(
     <>
@@ -20,7 +17,7 @@ const Brand = ({ token, clearToken}) =>{
         ?
         null
         :
-        <Logout clearToken={clearToken}/>
+        <Logout clearUser={clearUser}/>
   
         }
       </Navbar>
