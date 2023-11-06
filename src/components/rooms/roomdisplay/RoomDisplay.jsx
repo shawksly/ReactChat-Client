@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Row, Col, Form, Input, Button } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import Update from "../update/Update";
 import Delete from "../delete/Delete";
 import MessagesDisplay from "../../messages/messagesdisplay/MessagesDisplay";
@@ -12,37 +12,39 @@ function RoomDisplay({
   setCurrentRoomId,
   token,
   fetchRooms,
-  fetchMessages,
   userId,
-  roomUserId,
   roomOwnerStatus,
-  errorHandler
+  errorHandler,
 }) {
 
   const [messages, setMessages] = useState({});
 
   async function fetchMessages() {
+    // doesn't fetch if no token stored
     if (token)
       try {
-        let response = await fetch(`http://localhost:4000/message/show/${currentRoomId}`, {
-          headers: new Headers({
-            "content-type": "application/json",
-            authorization: token,
-          }),
-          method: "GET",
-        });
-        
+        // sends request to server
+        let response = await fetch(
+          `http://localhost:4000/message/show/${currentRoomId}`,
+          {
+            headers: new Headers({
+              "content-type": "application/json",
+              authorization: token,
+            }),
+            method: "GET",
+          }
+        );
+
         let results = await response.json();
         console.log(results);
         console.log(token);
 
         errorHandler(results);
 
-        // TODO make this do something if successful
         if (response.status === 200) {
           setMessages(results);
         } else {
-          setMessages({})
+          setMessages({});
         }
 
       } catch (error) {
@@ -54,8 +56,8 @@ function RoomDisplay({
     <>
       <Row className="h-100">
         <Col className="bg-light d-flex flex-column align-items-center" xs="2">
+          {/* update button */}
           <Update
-            setCurrentRoom={setCurrentRoom}
             currentRoomId={currentRoomId}
             token={token}
             fetchRooms={fetchRooms}
@@ -64,6 +66,7 @@ function RoomDisplay({
           />
           <h3 className="m-4">Description</h3>
           <p className="text-break flex-grow-1">{currentRoom.description}</p>
+          {/* delete button */}
           <Delete
             setCurrentRoom={setCurrentRoom}
             currentRoomId={currentRoomId}
@@ -74,24 +77,29 @@ function RoomDisplay({
             errorHandler={errorHandler}
           />
         </Col>
-        {/* https://stackoverflow.com/questions/21515042/scrolling-a-flexbox-with-overflowing-content */}
-        {/* <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10">
-          <h1 className="text-capitalize">{currentRoom.title}</h1> */}
-        <Col className="bg-light d-flex flex-column align-items-center h-100" xs="10" style={{ maxHeight: "75vh", overflow: "hidden" }}>
+        <Col
+          className="bg-light d-flex flex-column align-items-center h-100"
+          xs="10"
+          style={{ maxHeight: "75vh", overflow: "hidden" }}
+        >
           <h1>{currentRoom.title}</h1>
-
-          
-          <MessagesDisplay currentRoom={currentRoom} currentRoomId={currentRoomId} token={token} fetchMessages={fetchMessages} messages={messages} userId={userId} errorHandler={errorHandler} />
-
-          {/* // TODO Needs to be replaced by input component containing the below code */}
-          <SendMessage
-          currentRoomId={currentRoomId}
-          token={token}
-          fetchMessages={fetchMessages}
-          errorHandler={errorHandler}
+          {/* messages display */}
+          <MessagesDisplay
+            currentRoom={currentRoom}
+            currentRoomId={currentRoomId}
+            token={token}
+            fetchMessages={fetchMessages}
+            messages={messages}
+            userId={userId}
+            errorHandler={errorHandler}
           />
-
-          
+          {/* send message input and button */}
+          <SendMessage
+            currentRoomId={currentRoomId}
+            token={token}
+            fetchMessages={fetchMessages}
+            errorHandler={errorHandler}
+          />
         </Col>
       </Row>
     </>

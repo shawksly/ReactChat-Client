@@ -1,22 +1,39 @@
-import React from 'react'
-import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
+import React from "react";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  Input,
+  Label,
+  ModalFooter,
+} from "reactstrap";
 import { useState } from "react";
 
-function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerStatus, errorHandler }) {
+function Update({
+  currentRoomId,
+  token,
+  fetchRooms,
+  roomOwnerStatus,
+  errorHandler,
+}) {
+
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  const [roomName, setRoomname] = useState('');
-  const [description, setDescription] = useState('');
-
+  const [roomName, setRoomname] = useState("");
+  const [description, setDescription] = useState("");
 
   return (
     <>
+      {/* button toggles modal */}
       <Button color="dark" disabled={!roomOwnerStatus} onClick={toggle}>
         Update
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Update Room</ModalHeader>
         <ModalBody>
+          {/* room name */}
           <FormGroup floating>
             <Input
               id="roomNameInput"
@@ -45,9 +62,10 @@ function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerSta
           </FormGroup>
         </ModalBody>
         <ModalFooter>
+          {/* modal submit and cancel buttons */}
           <Button color="primary" onClick={postRoom}>
             Update Room
-          </Button>{' '}
+          </Button>{" "}
           <Button color="secondary" onClick={toggle}>
             Cancel
           </Button>
@@ -56,47 +74,48 @@ function Update({ setCurrentRoom, token, currentRoomId, fetchRooms, roomOwnerSta
     </>
   );
 
-  async function postRoom (e) {
+  async function postRoom(e) {
     e.preventDefault();
-      console.log("room: ", roomName);
-      console.log("description: ", description);
-      toggle();
+    console.log("room: ", roomName);
+    console.log("description: ", description);
+    toggle();
 
-      // TODO Need something like this in case user doesn't fill out both fields (server can handle one field if only that field is sent in json).
-      const body = {};
-      if(roomName.length > 0)
-        body.title = roomName;
-      if(description.length > 0)
-        body.description = description;
+    // adds individual entries to object, in case one is blank. This object is then sent as the body, stringified.
+    const body = {};
+    if (roomName.length > 0) body.title = roomName;
+    if (description.length > 0) body.description = description;
 
-
-      try {
-        let response = await fetch(`http://localhost:4000/room/${currentRoomId}`, {
+    try {
+      // sends request to server
+      let response = await fetch(
+        `http://localhost:4000/room/${currentRoomId}`,
+        {
           headers: new Headers({
             "content-type": "application/json",
-            "authorization": token
+            authorization: token,
           }),
           method: "PATCH",
           body: JSON.stringify(body),
-        });
-
-        let results = await response.json();
-        console.log("results", results);
-        console.log("token", token);
-
-        errorHandler(results);
-        
-        setRoomname('');
-        setDescription('');
-
-        if(response.status === 200) {
-          fetchRooms();
         }
-  
-        } catch (error) {
-          console.log(error);
-        }
+      );
+
+      let results = await response.json();
+      console.log("results", results);
+      console.log("token", token);
+
+      errorHandler(results);
+
+      // set back to zero in case a field is left blank and the useState retains the old value.
+      setRoomname("");
+      setDescription("");
+
+      if (response.status === 200) {
+        fetchRooms();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 
-export default Update
+export default Update;

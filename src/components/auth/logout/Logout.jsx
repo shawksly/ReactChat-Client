@@ -1,18 +1,22 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import{Button} from 'reactstrap'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "reactstrap";
 
-function Logout({clearUser}) {
-  const navigate = useNavigate()
+function Logout({ clearUser }) {
+  
+  const navigate = useNavigate();
 
-  function redirect(){
+  //clears user and sends to login/signup
+  function redirect() {
     clearUser();
-    navigate('/');
+    navigate("/");
   }
 
   return (
-    <Button color='dark' onClick={redirect}>Logout</Button>
-  )
+    <Button color="dark" onClick={redirect}>
+      Logout
+    </Button>
+  );
 }
 
-export default Logout
+export default Logout;

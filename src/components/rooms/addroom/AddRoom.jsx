@@ -1,53 +1,67 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, ModalFooter } from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  Input,
+  Label,
+  ModalFooter,
+} from "reactstrap";
 import { useState } from "react";
 
 function AddRoom({ token, fetchRooms, errorHandler }) {
+
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  const [roomName, setRoomname] = useState('');
-  const [description, setDescription] = useState('');
+  const [roomName, setRoomname] = useState("");
+  const [description, setDescription] = useState("");
 
-  async function postRoom (e) {
+  async function postRoom(e) {
     e.preventDefault();
-      console.log("room: ", roomName);
-      console.log("description: ", description);
-      toggle();
+    console.log("room: ", roomName);
+    console.log("description: ", description);
+    // toggles modal
+    toggle();
 
-      try {
-        let response = await fetch("http://localhost:4000/room/create", {
-          headers: new Headers({
-            "content-type": "application/json",
-            "authorization": token
-          }),
-          method: "POST",
-          body: JSON.stringify({
-            title: roomName,
-            description: description
-          }),
-        });
+    try {
+      // sends request to server
+      let response = await fetch("http://localhost:4000/room/create", {
+        headers: new Headers({
+          "content-type": "application/json",
+          authorization: token,
+        }),
+        method: "POST",
+        body: JSON.stringify({
+          title: roomName,
+          description: description,
+        }),
+      });
 
-        let results = await response.json();
+      let results = await response.json();
 
-        errorHandler(results);
+      errorHandler(results);
 
-        console.log("results", results);
+      console.log("results", results);
 
-        fetchRooms();
+      fetchRooms();
 
-      } catch (error) {
-        console.log(error);
-      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <>
+      {/* button for modal */}
       <Button color="dark" onClick={toggle}>
         Add Room
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>New Rooms</ModalHeader>
         <ModalBody>
+            {/* room name */}
           <FormGroup floating>
             <Input
               id="roomNameInput"
@@ -76,9 +90,10 @@ function AddRoom({ token, fetchRooms, errorHandler }) {
           </FormGroup>
         </ModalBody>
         <ModalFooter>
+          {/* modal submit and close buttons */}
           <Button color="primary" onClick={postRoom}>
             Add Room
-          </Button>{' '}
+          </Button>{" "}
           <Button color="secondary" onClick={toggle}>
             Cancel
           </Button>

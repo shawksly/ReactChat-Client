@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, FormGroup, Input, Label, Button } from "reactstrap";
 
-function Signup({ updateUser, setSignup, setUserId, errorHandler }) {
+function Signup({ updateUser, setSignup, errorHandler }) {
+  
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -56,7 +57,6 @@ function Signup({ updateUser, setSignup, setUserId, errorHandler }) {
 
         {/* Buttons */}
         <Container className="d-flex justify-content-between">
-
           {/* button to switch to login */}
           <Button
             className="btn-link link-secondary"
@@ -71,7 +71,6 @@ function Signup({ updateUser, setSignup, setUserId, errorHandler }) {
           <Button size="lg" color="dark" onClick={processUserData}>
             Submit
           </Button>
-
         </Container>
       </Form>
     </>
@@ -88,7 +87,7 @@ function Signup({ updateUser, setSignup, setUserId, errorHandler }) {
       // request sent to server
       let response = await fetch("http://localhost:4000/user/signup", {
         headers: new Headers({
-          "content-type": "application/json"
+          "content-type": "application/json",
         }),
         method: "POST",
         body: JSON.stringify({
@@ -105,8 +104,8 @@ function Signup({ updateUser, setSignup, setUserId, errorHandler }) {
 
       updateUser(results.token, results.user._id);
 
-      // TODO needs to redirect somewhere
       if (response.status === 200) navigate("/display");
+
     } catch (error) {
       console.log(error);
     }
