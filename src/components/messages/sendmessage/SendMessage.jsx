@@ -1,54 +1,66 @@
-import React from "react"
-import {Button,Form,Input} from 'reactstrap'
-import {useState} from "react"
+import React from "react";
+import { Button, Form, Input } from "reactstrap";
+import { useState } from "react";
 
-function SendMessage({
-  currentRoomId,
-  token,
-  fetchMessages,
-  errorHandler
-}) {
+function SendMessage({ currentRoomId, token, fetchMessages, errorHandler }) {
   
-  const [message,setMessage] = useState('')
+  const [message, setMessage] = useState("");
 
   return (
-  
     <Form className="d-flex align-self-stretch">
-    {/* <FormGroup> */}
-      <Input id="text" name="text" type="textarea" rows="2" onChange={(e)=>{
-        setMessage(e.target.value)
-      }} />
-      <Button className="align-self-end ms-3" color="dark" onClick={postMessage}>Send</Button>
-    {/* </FormGroup> */}
-  </Form>
-  
-  )
+      {/* message input */}
+      <Input
+        id="text"
+        name="text"
+        type="textarea"
+        rows="2"
+        onChange={(e) => {
+          setMessage(e.target.value);
+        }}
+      />
+      {/* message send button */}
+      <Button
+        className="align-self-end ms-3"
+        color="dark"
+        onClick={postMessage}
+      >
+        Send
+      </Button>
+    </Form>
+  );
 
-  async function postMessage (e) {
+  async function postMessage(e) {
     e.preventDefault();
 
-    try{
-      let response = await fetch(`http://localhost:4000/message/create/${currentRoomId}`,{
-        headers: new Headers({
-          "content-type": "application/json",
-          "authorization":token
-        }),
-        method: "POST",
-        body: JSON.stringify({
-          text: message,
-        }),
-      })
+    try {
+      // sends request to server
+      let response = await fetch(
+        `http://localhost:4000/message/create/${currentRoomId}`,
+        {
+          headers: new Headers({
+            "content-type": "application/json",
+            authorization: token,
+          }),
+          method: "POST",
+          body: JSON.stringify({
+            text: message,
+          }),
+        }
+      );
       let results = await response.json();
-      console.log('results',results)
+      console.log("results", results);
 
       errorHandler(results);
 
       fetchMessages();
-      document.getElementById('text').value = '';
-    }catch (error){
-      console.log(error)
+
+      // sets input field back to empty
+      document.getElementById("text").value = "";
+
+    } catch (error) {
+      console.log(error);
     }
   }
 }
 
-export default SendMessage
+export default SendMessage;

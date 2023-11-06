@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, FormGroup, Input, Label, Button } from "reactstrap";
 
-function Login({ updateUser, setSignup, setUserId, errorHandler }) {
+function Login({ updateUser, setSignup, errorHandler }) {
+  
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -10,9 +11,10 @@ function Login({ updateUser, setSignup, setUserId, errorHandler }) {
 
   return (
     <>
-    <Form>
-      <FormGroup floating>
-      <Input
+      <Form>
+        <FormGroup floating>
+          {/* Username */}
+          <Input
             id="usernameInput"
             name="username"
             placeholder="Username"
@@ -40,8 +42,7 @@ function Login({ updateUser, setSignup, setUserId, errorHandler }) {
 
         {/* Buttons */}
         <Container className="d-flex justify-content-between">
-
-          {/* button to switch to login */}
+          {/* button to switch to signup */}
           <Button
             className="btn-link link-secondary"
             onClick={() => {
@@ -55,7 +56,6 @@ function Login({ updateUser, setSignup, setUserId, errorHandler }) {
           <Button size="lg" color="dark" onClick={processUserData}>
             Submit
           </Button>
-
         </Container>
       </Form>
     </>
@@ -71,7 +71,7 @@ function Login({ updateUser, setSignup, setUserId, errorHandler }) {
       // request sent to server
       let response = await fetch("http://localhost:4000/user/login", {
         headers: new Headers({
-          "content-type": "application/json"
+          "content-type": "application/json",
         }),
         method: "POST",
         body: JSON.stringify({

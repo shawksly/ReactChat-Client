@@ -4,42 +4,34 @@ import RoomsList from "../rooms/roomslist/RoomsList";
 import RoomDisplay from "../rooms/roomdisplay/RoomDisplay";
 
 function Display({ token, userId, errorHandler }) {
+
   const [currentRoom, setCurrentRoom] = useState({});
   const [currentRoomId, setCurrentRoomId] = useState("");
   const [rooms, setRooms] = useState({});
-  const [roomUserId, setRoomUserId] = useState('');
+  const [roomUserId, setRoomUserId] = useState("");
   const [roomOwnerStatus, setRoomOwnerstatus] = useState(false);
 
+  // checks if user owns room and disables delete and update if they don't
   useEffect(() => {
-    if(userId === roomUserId) {
+    if (userId === roomUserId) {
       setRoomOwnerstatus(true);
     } else {
       setRoomOwnerstatus(false);
-    };
-    
-  }, [userId, roomUserId])
+    }
+  }, [userId, roomUserId]);
 
+  // sets variables for currently displayed room to be used by other components and fetches
   function chooseDisplayedRoom(room) {
     setCurrentRoom(room);
     setCurrentRoomId(room._id);
     setRoomUserId(room.owner);
-
-    console.log('user', userId);
-    console.log('room', roomUserId);
-    console.log('equal', userId === roomUserId);
-    console.log('owner', room.owner);
-
-    // TODO REMOVE
-    if(userId === roomUserId) {
-      setRoomOwnerstatus(true);
-    } else {
-      setRoomOwnerstatus(false);
-    };
-  }
+  };
 
   async function fetchRooms() {
+    // doesn't fetch if no token stored
     if (token)
       try {
+        // sends request to server
         let response = await fetch("http://localhost:4000/room/list", {
           headers: new Headers({
             "content-type": "application/json",
@@ -49,14 +41,14 @@ function Display({ token, userId, errorHandler }) {
         });
 
         let results = await response.json();
-        
+
         errorHandler(results);
 
         console.log(results);
         console.log(token);
 
-        // TODO make this do something if successful
         if (response.status === 200) setRooms(results);
+
       } catch (error) {
         console.log(error);
       }
@@ -64,24 +56,24 @@ function Display({ token, userId, errorHandler }) {
 
   return (
     <Container
-      // TODO h-50 doesn't do anything and I'd like to come back and fix that at some point -Scott
       className="mw-100 d-flex flex-column m-2 h-100"
     >
       <Row>
-        <Col className="bg-light d-flex flex-column align-items-start py-3 ps-3" xs="3">
-          {/* Add rooms column */}
+        <Col
+          className="bg-light d-flex flex-column align-items-start py-3 ps-3"
+          xs="3"
+        >
+          {/* rooms list */}
           <RoomsList
             token={token}
             chooseDisplayedRoom={chooseDisplayedRoom}
             fetchRooms={fetchRooms}
-            currentRoom={currentRoom}
-            currentRoomId={currentRoomId}
             rooms={rooms}
             errorHandler={errorHandler}
           />
         </Col>
         <Col className="bg-light py-3 pe-3" xs="9">
-          {/* Display room column */}
+          {/* room/messages column */}
           {Object.keys(currentRoom).length <= 0 ? null : (
             <RoomDisplay
               currentRoom={currentRoom}
@@ -91,7 +83,6 @@ function Display({ token, userId, errorHandler }) {
               token={token}
               fetchRooms={fetchRooms}
               userId={userId}
-              roomUserId={roomUserId}
               roomOwnerStatus={roomOwnerStatus}
               errorHandler={errorHandler}
             />
