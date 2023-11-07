@@ -48,7 +48,6 @@ function SendMessage({ currentRoomId, token, fetchMessages, errorHandler }) {
         }
       );
       let results = await response.json();
-      console.log("results", results);
 
       errorHandler(results);
 

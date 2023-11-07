@@ -20,8 +20,6 @@ function AddRoom({ token, fetchRooms, errorHandler }) {
 
   async function postRoom(e) {
     e.preventDefault();
-    console.log("room: ", roomName);
-    console.log("description: ", description);
     // toggles modal
     toggle();
 
@@ -42,8 +40,6 @@ function AddRoom({ token, fetchRooms, errorHandler }) {
       let results = await response.json();
 
       errorHandler(results);
-
-      console.log("results", results);
 
       fetchRooms();
 

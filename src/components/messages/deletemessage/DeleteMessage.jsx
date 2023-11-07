@@ -14,7 +14,6 @@ function DeleteMessage({ fetchMessages, token, messageId, errorHandler }) {
 
   async function deleteMessage(e) {
     e.preventDefault();
-    console.log("deleting message");
 
     try {
       // sends request to server
@@ -27,7 +26,6 @@ function DeleteMessage({ fetchMessages, token, messageId, errorHandler }) {
       });
 
       let results = await response.json();
-      console.log("results", results);
 
       errorHandler(results);
 

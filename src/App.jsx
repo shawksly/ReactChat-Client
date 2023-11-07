@@ -31,9 +31,7 @@ function App() {
   // stores token and user id in local storage
   function initializeUser() {
     setToken(localStorage.token);
-    console.log("localStorage.token: ", localStorage.token);
     setUserId(localStorage.userId);
-    console.log("localStorage.userId: ", localStorage.userId);
   }
 
   // updates token and user id
@@ -42,7 +40,6 @@ function App() {
     localStorage.token = newToken;
     setUserId(newId);
     localStorage.userId = newId;
-    console.log(localStorage);
   }
 
   // removes token and user id from local storage
