@@ -13,7 +13,6 @@ function Delete({
 
   async function deleteRoom(e) {
     e.preventDefault();
-    console.log("deleting room");
 
     try {
       // sends request to server
@@ -29,7 +28,6 @@ function Delete({
       );
 
       let results = await response.json();
-      console.log("results", results);
 
       errorHandler(results);
 

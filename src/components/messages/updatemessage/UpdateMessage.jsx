@@ -25,7 +25,6 @@ function UpdateMessage({
 
   async function postMessage(e) {
     e.preventDefault();
-    console.log("message: ", messageContent);
     toggle();
 
     try {
@@ -47,9 +46,6 @@ function UpdateMessage({
       let results = await response.json();
 
       errorHandler(results);
-
-      console.log("results", results);
-      console.log("token", token);
 
       if (response.status === 200) {
         fetchMessages();

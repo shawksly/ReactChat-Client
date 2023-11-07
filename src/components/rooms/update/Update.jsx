@@ -17,6 +17,7 @@ function Update({
   fetchRooms,
   roomOwnerStatus,
   errorHandler,
+  chooseDisplayedRoom
 }) {
 
   const [modal, setModal] = useState(false);
@@ -76,8 +77,6 @@ function Update({
 
   async function postRoom(e) {
     e.preventDefault();
-    console.log("room: ", roomName);
-    console.log("description: ", description);
     toggle();
 
     // adds individual entries to object, in case one is blank. This object is then sent as the body, stringified.
@@ -100,10 +99,9 @@ function Update({
       );
 
       let results = await response.json();
-      console.log("results", results);
-      console.log("token", token);
 
       errorHandler(results);
+      chooseDisplayedRoom(results.updated);
 
       // set back to zero in case a field is left blank and the useState retains the old value.
       setRoomname("");

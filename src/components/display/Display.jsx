@@ -44,9 +44,6 @@ function Display({ token, userId, errorHandler }) {
 
         errorHandler(results);
 
-        console.log(results);
-        console.log(token);
-
         if (response.status === 200) setRooms(results);
 
       } catch (error) {
@@ -85,6 +82,7 @@ function Display({ token, userId, errorHandler }) {
               userId={userId}
               roomOwnerStatus={roomOwnerStatus}
               errorHandler={errorHandler}
+              chooseDisplayedRoom={chooseDisplayedRoom}
             />
           )}
         </Col>

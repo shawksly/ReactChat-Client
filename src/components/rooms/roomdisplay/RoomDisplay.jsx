@@ -15,6 +15,7 @@ function RoomDisplay({
   userId,
   roomOwnerStatus,
   errorHandler,
+  chooseDisplayedRoom
 }) {
 
   const [messages, setMessages] = useState({});
@@ -36,8 +37,6 @@ function RoomDisplay({
         );
 
         let results = await response.json();
-        console.log(results);
-        console.log(token);
 
         errorHandler(results);
 
@@ -63,9 +62,10 @@ function RoomDisplay({
             fetchRooms={fetchRooms}
             roomOwnerStatus={roomOwnerStatus}
             errorHandler={errorHandler}
+            chooseDisplayedRoom={chooseDisplayedRoom}
           />
           <h3 className="m-4">Description</h3>
-          <p className="text-break flex-grow-1">{currentRoom.description}</p>
+          <p className="text-break flex-grow-1 text-capitalize">{currentRoom.description}</p>
           {/* delete button */}
           <Delete
             setCurrentRoom={setCurrentRoom}
@@ -82,7 +82,7 @@ function RoomDisplay({
           xs="10"
           style={{ maxHeight: "75vh", overflow: "hidden" }}
         >
-          <h1>{currentRoom.title}</h1>
+          <h1 className="text-capitalize">{currentRoom.title}</h1>
           {/* messages display */}
           <MessagesDisplay
             currentRoom={currentRoom}

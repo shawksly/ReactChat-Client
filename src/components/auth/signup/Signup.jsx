@@ -79,9 +79,6 @@ function Signup({ updateUser, setSignup, errorHandler }) {
   // runs on button click
   async function processUserData(e) {
     e.preventDefault();
-    console.log("username: ", username);
-    console.log("email: ", email);
-    console.log("password: ", password);
 
     try {
       // request sent to server
@@ -98,7 +95,6 @@ function Signup({ updateUser, setSignup, errorHandler }) {
       });
 
       let results = await response.json();
-      console.log("results", results);
 
       errorHandler(results);
 
