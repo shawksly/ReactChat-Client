@@ -10,6 +10,7 @@ import {
   ModalFooter,
 } from "reactstrap";
 import { useState } from "react";
+import { baseUrl } from "../../../Urls";
 
 function AddRoom({ token, fetchRooms, errorHandler }) {
 
@@ -25,7 +26,7 @@ function AddRoom({ token, fetchRooms, errorHandler }) {
 
     try {
       // sends request to server
-      let response = await fetch("http://localhost:4000/room/create", {
+      let response = await fetch(`${baseUrl}/room/create`, {
         headers: new Headers({
           "content-type": "application/json",
           authorization: token,

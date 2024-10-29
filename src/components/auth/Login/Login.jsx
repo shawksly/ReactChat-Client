@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, FormGroup, Input, Label, Button } from "reactstrap";
+import { baseUrl } from "../../../Urls";
 
 function Login({ updateUser, setSignup, errorHandler }) {
   
@@ -67,7 +68,7 @@ function Login({ updateUser, setSignup, errorHandler }) {
 
     try {
       // request sent to server
-      let response = await fetch("http://localhost:4000/user/login", {
+      let response = await fetch(`${baseUrl}/user/login`, {
         headers: new Headers({
           "content-type": "application/json",
         }),

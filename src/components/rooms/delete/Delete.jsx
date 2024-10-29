@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "reactstrap";
+import { baseUrl } from "../../../Urls";
 
 function Delete({
   setCurrentRoom,
@@ -17,7 +18,7 @@ function Delete({
     try {
       // sends request to server
       let response = await fetch(
-        `http://localhost:4000/room/${currentRoomId}`,
+        `${baseUrl}/room/${currentRoomId}`,
         {
           headers: new Headers({
             "content-type": "application/json",

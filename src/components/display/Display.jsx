@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import RoomsList from "../rooms/roomslist/RoomsList";
 import RoomDisplay from "../rooms/roomdisplay/RoomDisplay";
+import { baseUrl } from "../../Urls";
 
 function Display({ token, userId, errorHandler }) {
 
@@ -32,7 +33,7 @@ function Display({ token, userId, errorHandler }) {
     if (token)
       try {
         // sends request to server
-        let response = await fetch("http://localhost:4000/room/list", {
+        let response = await fetch(`${baseUrl}/room/list`, {
           headers: new Headers({
             "content-type": "application/json",
             authorization: token,

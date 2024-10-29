@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Form, Input } from "reactstrap";
 import { useState } from "react";
+import { baseUrl } from "../../../Urls";
 
 function SendMessage({ currentRoomId, token, fetchMessages, errorHandler }) {
   
@@ -35,7 +36,7 @@ function SendMessage({ currentRoomId, token, fetchMessages, errorHandler }) {
     try {
       // sends request to server
       let response = await fetch(
-        `http://localhost:4000/message/create/${currentRoomId}`,
+        `${baseUrl}/message/create/${currentRoomId}`,
         {
           headers: new Headers({
             "content-type": "application/json",

@@ -1,4 +1,5 @@
 import React from "react";
+import { baseUrl } from "../../../Urls";
 
 function DeleteMessage({ fetchMessages, token, messageId, errorHandler }) {
 
@@ -17,7 +18,7 @@ function DeleteMessage({ fetchMessages, token, messageId, errorHandler }) {
 
     try {
       // sends request to server
-      let response = await fetch(`http://localhost:4000/message/${messageId}`, {
+      let response = await fetch(`${baseUrl}/message/${messageId}`, {
         headers: new Headers({
           "content-type": "application/json",
           authorization: token,

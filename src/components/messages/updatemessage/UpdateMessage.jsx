@@ -30,7 +30,7 @@ function UpdateMessage({
     try {
       // sends request to server
       let response = await fetch(
-        `http://localhost:4000/message/${currentRoomId}/${messageId}`,
+        `${process.env.BACKEND_URL}message/${currentRoomId}/${messageId}`,
         {
           headers: new Headers({
             "content-type": "application/json",

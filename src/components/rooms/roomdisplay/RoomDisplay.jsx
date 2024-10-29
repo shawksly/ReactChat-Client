@@ -4,6 +4,7 @@ import Update from "../update/Update";
 import Delete from "../delete/Delete";
 import MessagesDisplay from "../../messages/messagesdisplay/MessagesDisplay";
 import SendMessage from "../../messages/sendmessage/SendMessage";
+import { baseUrl } from "../../../Urls";
 
 function RoomDisplay({
   currentRoom,
@@ -26,7 +27,7 @@ function RoomDisplay({
       try {
         // sends request to server
         let response = await fetch(
-          `http://localhost:4000/message/show/${currentRoomId}`,
+          `${baseUrl}/message/show/${currentRoomId}`,
           {
             headers: new Headers({
               "content-type": "application/json",
